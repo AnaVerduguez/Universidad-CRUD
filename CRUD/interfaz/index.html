@@ -3,65 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario del Hogar</title>
+    <title>Mi Inventario Feliz 🏠</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🏠 Inventario del Hogar</h1>
-            <p>Gestiona tus artículos de forma simple</p>
+            <div class="header-content">
+                <h1>Mi Inventario Feliz</h1>
+                <p class="subtitle">Organiza tu hogar con alegría y simplicidad</p>
+                <div class="header-decoration">
+                    <span class="dot dot-1"></span>
+                    <span class="dot dot-2"></span>
+                    <span class="dot dot-3"></span>
+                </div>
+            </div>
         </header>
 
         <!-- Formulario -->
         <div class="form-container">
-            <h2 id="form-title">Agregar Nuevo Item</h2>
+            <div class="form-header">
+                <h2 id="form-title">Agregar Nuevo Item</h2>
+                <p class="form-description">Llena los campos para agregar un nuevo producto a tu inventario</p>
+            </div>
+            
             <form id="item-form">
                 <input type="hidden" id="item-id">
                 
-                <div class="form-group">
-                    <label for="nombre">Nombre *</label>
-                    <input type="text" id="nombre" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Producto</label>
+                        <input type="text" id="nombre" placeholder="Ej: Arroz integral" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" required>
+                            <option value="">Seleccionar categoría...</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Limpieza">Limpieza</option>
+                            <option value="Higiene">Higiene</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" min="0" placeholder="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_expiracion">Fecha de Expiración</label>
+                        <input type="date" id="fecha_expiracion">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="categoria">Categoría *</label>
-                    <select id="categoria" required>
-                        <option value="">Seleccionar...</option>
-                        <option value="Comida">Comida</option>
-                        <option value="Limpieza">Limpieza</option>
-                        <option value="Higiene">Higiene</option>
-                        <option value="Otros">Otros</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="cantidad">Cantidad *</label>
-                    <input type="number" id="cantidad" min="0" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="fecha_expiracion">Fecha de Expiración</label>
-                    <input type="date" id="fecha_expiracion">
-                </div>
-
-                <div class="form-group">
-                    <label for="notas">Notas</label>
-                    <textarea id="notas" rows="3"></textarea>
+                    <label for="notas">Notas adicionales</label>
+                    <textarea id="notas" rows="3" placeholder="Agrega cualquier detalle importante..."></textarea>
                 </div>
 
                 <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="btn-text">Guardar Item</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">
+                        Cancelar
+                    </button>
                 </div>
             </form>
         </div>
 
         <!-- Lista de Items -->
         <div class="items-container">
-            <h2>Mis Items</h2>
+            <div class="items-header">
+                <h2>Mis Productos</h2>
+                <p class="items-description">Aquí están todos tus items organizados</p>
+            </div>
             <div id="items-list"></div>
         </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Hecho con amor para mantener tu hogar organizado ✨</p>
+        </footer>
     </div>
 
     <script src="app.js"></script>

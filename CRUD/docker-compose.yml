@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Base de datos MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: inventario_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: inventario_hogar
+      MYSQL_USER: crud_user
+      MYSQL_PASSWORD: crud_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - inventario_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Aplicación Go
+  app:
+    build: .
+    container_name: inventario_app
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_USER: crud_user
+      DB_PASSWORD: crud_password
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: inventario_hogar
+    networks:
+      - inventario_network
+
+volumes:
+  mysql_data:
+
+networks:
+  inventario_network:
+    driver: bridge

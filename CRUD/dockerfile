@@ -1,0 +1,39 @@
+# Usar imagen oficial de Go
+FROM golang:1.22-alpine AS builder
+
+# Instalar dependencias necesarias
+RUN apk add --no-cache git
+
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos de dependencias
+COPY go.mod go.sum ./
+
+# Descargar dependencias
+RUN go mod download
+
+# Copiar el código fuente
+COPY . .
+
+# Compilar la aplicación
+RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+
+# Imagen final más ligera
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+# Copiar el binario compilado
+COPY --from=builder /app/main .
+
+# Copiar archivos estáticos
+COPY --from=builder /app/interfaz ./interfaz
+
+# Exponer el puerto
+EXPOSE 8080
+
+# Comando para ejecutar
+CMD ["./main"]

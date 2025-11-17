@@ -4,13 +4,14 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 var DB *sql.DB
 
-// Configuración de la base de datos
 type DBConfig struct {
 	User     string
 	Password string
@@ -19,17 +20,23 @@ type DBConfig struct {
 	Database string
 }
 
-// ConnectDB establece la conexión con MySQL
+func getEnv(key, defaultValue string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		return defaultValue
+	}
+	return value
+}
+
 func ConnectDB() {
 	config := DBConfig{
-		User:     "root",
-		Password: "1655",
-		Host:     "localhost",
-		Port:     "3306",
-		Database: "inventario_hogar",
+		User:     getEnv("DB_USER", "root"),
+		Password: getEnv("DB_PASSWORD", "rootpassword"),
+		Host:     getEnv("DB_HOST", "localhost"),
+		Port:     getEnv("DB_PORT", "3306"),
+		Database: getEnv("DB_NAME", "inventario_hogar"),
 	}
 
-	// Formato: user:password@tcp(host:port)/database
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		config.User,
 		config.Password,
@@ -39,21 +46,29 @@ func ConnectDB() {
 	)
 
 	var err error
-	DB, err = sql.Open("mysql", dsn)
-	if err != nil {
-		log.Fatal("Error al abrir la conexión:", err)
+
+	// Reintentar conexión hasta 30 segundos
+	for i := 0; i < 30; i++ {
+		DB, err = sql.Open("mysql", dsn)
+		if err != nil {
+			log.Printf("Intento %d: Error al abrir conexión: %v", i+1, err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		err = DB.Ping()
+		if err == nil {
+			log.Println("✅ Conexión exitosa a MySQL")
+			return
+		}
+
+		log.Printf("Intento %d: Error al conectar: %v", i+1, err)
+		time.Sleep(1 * time.Second)
 	}
 
-	// Verificar la conexión
-	err = DB.Ping()
-	if err != nil {
-		log.Fatal("Error al conectar con la base de datos:", err)
-	}
-
-	log.Println("✅ Conexión exitosa a MySQL")
+	log.Fatal("❌ No se pudo conectar a MySQL después de 30 intentos")
 }
 
-// CloseDB cierra la conexión
 func CloseDB() {
 	if DB != nil {
 		DB.Close()
