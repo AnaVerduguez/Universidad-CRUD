@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Item representa un objeto del inventario
+// Item representa un item en la base de datos
 type Item struct {
 	ID              int       `json:"id"`
 	Nombre          string    `json:"nombre"`

@@ -27,7 +27,6 @@ body {
     margin: 0 auto;
 }
 
-/* Header */
 header {
     text-align: center;
     margin-bottom: 40px;
@@ -85,7 +84,6 @@ header {
     50% { transform: translateY(-10px); }
 }
 
-/* Form Container */
 .form-container {
     background: var(--white);
     padding: 40px;
@@ -197,7 +195,6 @@ header {
     transform: translateY(-2px);
 }
 
-/* Items Container */
 .items-container {
     background: var(--white);
     padding: 40px;
@@ -348,18 +345,16 @@ header {
     font-size: 1.1em;
 }
 
-/* Estados de expiración */
 .expired {
     border-left-color: var(--dark);
-    background: linear-gradient(135deg, #f5e6e8 0%, var(--beige) 100%);
+    background: var(--beige);
 }
 
 .expiring-soon {
     border-left-color: var(--pink-light);
-    background: linear-gradient(135deg, #fff8e6 0%, var(--beige) 100%);
+    background: var(--beige);
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 30px;
@@ -368,7 +363,6 @@ footer {
     font-size: 1em;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .header-content h1 {
         font-size: 2em;
@@ -392,7 +386,6 @@ footer {
     }
 }
 
-/* Animaciones */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -408,7 +401,6 @@ footer {
     animation: fadeIn 0.5s ease;
 }
 
-/* Scrollbar personalizado */
 ::-webkit-scrollbar {
     width: 10px;
 }

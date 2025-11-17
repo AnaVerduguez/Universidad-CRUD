@@ -23,7 +23,7 @@ async function loadItems() {
         displayItems(items);
     } catch (error) {
         console.error('Error al cargar items:', error);
-        showNotification('Error al cargar los items 😢', 'error');
+        showNotification('Error al cargar los items', 'error');
     }
 }
 
@@ -33,7 +33,7 @@ function displayItems(items) {
     if (!items || items.length === 0) {
         container.innerHTML = `
             <div class="empty-state">
-                <p>¡Aún no tienes items! 🎉</p>
+                <p>¡Aún no tienes items! </p>
                 <p>Comienza agregando tu primer producto arriba</p>
             </div>
         `;
@@ -135,15 +135,15 @@ async function handleSubmit(e) {
             resetForm();
             loadItems();
             showNotification(
-                editingId ? '¡Item actualizado con éxito! 🎉' : '¡Item agregado con éxito! 🎉',
+                editingId ? '¡Item actualizado con éxito!' : '¡Item agregado con éxito! ',
                 'success'
             );
         } else {
-            showNotification('Oops, algo salió mal 😢', 'error');
+            showNotification('Oops, algo salió mal', 'error');
         }
     } catch (error) {
         console.error('Error:', error);
-        showNotification('Error al guardar el item 😢', 'error');
+        showNotification('Error al guardar el item ', 'error');
     } finally {
         btnText.textContent = originalText;
         submitBtn.disabled = false;
@@ -168,12 +168,12 @@ async function editItem(id) {
         document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
         console.error('Error:', error);
-        showNotification('Error al cargar el item 😢', 'error');
+        showNotification('Error al cargar el item ', 'error');
     }
 }
 
 async function deleteItem(id) {
-    if (!confirm('¿Estás seguro de eliminar este item? 🤔')) return;
+    if (!confirm('¿Estás seguro de eliminar este item? ')) return;
     
     try {
         const response = await fetch(`/api/items/${id}`, {
@@ -182,13 +182,13 @@ async function deleteItem(id) {
         
         if (response.ok) {
             loadItems();
-            showNotification('¡Item eliminado! 👋', 'success');
+            showNotification('¡Item eliminado! ', 'success');
         } else {
-            showNotification('Error al eliminar el item 😢', 'error');
+            showNotification('Error al eliminar el item ', 'error');
         }
     } catch (error) {
         console.error('Error:', error);
-        showNotification('Error al eliminar el item 😢', 'error');
+        showNotification('Error al eliminar el item ', 'error');
     }
 }
 
@@ -226,7 +226,6 @@ function showNotification(message, type) {
     }, 3000);
 }
 
-// Agregar estilos de animación
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {

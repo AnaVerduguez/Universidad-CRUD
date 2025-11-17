@@ -58,7 +58,7 @@ func ConnectDB() {
 
 		err = DB.Ping()
 		if err == nil {
-			log.Println("✅ Conexión exitosa a MySQL")
+			log.Println("Conexión exitosa a MySQL")
 			return
 		}
 
@@ -66,7 +66,7 @@ func ConnectDB() {
 		time.Sleep(1 * time.Second)
 	}
 
-	log.Fatal("❌ No se pudo conectar a MySQL después de 30 intentos")
+	log.Fatal("No se pudo conectar a MySQL después de 30 intentos")
 }
 
 func CloseDB() {

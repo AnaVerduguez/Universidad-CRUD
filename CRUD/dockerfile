@@ -30,7 +30,7 @@ WORKDIR /root/
 COPY --from=builder /app/main .
 
 # Copiar archivos estáticos
-COPY --from=builder /app/interfaz ./interfaz
+COPY --from=builder /app/interface ./interface
 
 # Exponer el puerto
 EXPOSE 8080

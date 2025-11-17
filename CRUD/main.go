@@ -29,9 +29,9 @@ func main() {
 	api.HandleFunc("/items/{id}", itemHandler.DeleteItem).Methods("DELETE")
 
 	// Servir archivos estáticos
-	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./interfaz")))
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./interface")))
 
 	// Iniciar servidor
-	log.Println("🚀 Servidor iniciado en http://localhost:8080")
+	log.Println("Servidor iniciado en http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

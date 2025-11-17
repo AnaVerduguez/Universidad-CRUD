@@ -14,7 +14,7 @@ type ItemHandler struct {
 	DB *sql.DB
 }
 
-// GetItems maneja GET /api/items
+// GetItems maneja GET
 func (h *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
 	items, err := models.GetAllItems(h.DB)
 	if err != nil {
@@ -26,7 +26,7 @@ func (h *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(items)
 }
 
-// GetItem maneja GET /api/items/{id}
+// GetItem maneja GET por su ID
 func (h *ItemHandler) GetItem(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -49,7 +49,7 @@ func (h *ItemHandler) GetItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// CreateItem maneja POST /api/items
+// CreateItem maneja POST
 func (h *ItemHandler) CreateItem(w http.ResponseWriter, r *http.Request) {
 	var item models.Item
 
@@ -70,7 +70,7 @@ func (h *ItemHandler) CreateItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// UpdateItem maneja PUT /api/items/{id}
+// UpdateItem maneja PUT
 func (h *ItemHandler) UpdateItem(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
@@ -97,7 +97,7 @@ func (h *ItemHandler) UpdateItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// DeleteItem maneja DELETE /api/items/{id}
+// DeleteItem maneja DELETE
 func (h *ItemHandler) DeleteItem(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])

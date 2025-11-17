@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS items (
 -- Insertar datos de ejemplo
 INSERT INTO items (nombre, categoria, cantidad, fecha_expiracion, notas) VALUES
 ('Arroz', 'Comida', 2, '2025-12-31', 'Paquete de 1kg'),
-('Detergente', 'Limpieza', 1, NULL, 'Para ropa'),
+('Detergente', 'Limpieza', 1, NULL, 'Para los platos'),
 ('Leche', 'Comida', 3, '2024-02-15', 'Descremada'),
 ('Pasta Dental', 'Higiene', 2, '2025-06-30', 'Colgate'),
 ('Aceite', 'Comida', 1, '2025-08-20', 'Aceite de oliva');
