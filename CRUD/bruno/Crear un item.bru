@@ -6,10 +6,22 @@ meta {
 
 post {
   url: http://localhost:8080/api/items
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "nombre": "Cafe",
+    "categoria": "Comida",
+    "cantidad": 1,
+    "notas": "",
+    "created_at": "2025-11-16T23:42:04Z",
+    "updated_at": "2025-11-16T23:42:04Z"
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
